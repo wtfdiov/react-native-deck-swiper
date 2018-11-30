@@ -343,8 +343,9 @@ class Swiper extends Component {
   getSwipeDirection = (animatedValueX, animatedValueY) => {
     const isSwipingLeft = animatedValueX < -this.props.horizontalThreshold
     const isSwipingRight = animatedValueX > this.props.horizontalThreshold
-    const isSwipingTop = animatedValueY < -this.props.verticalThreshold
-    const isSwipingBottom = animatedValueY > this.props.verticalThreshold
+    const isSwipingHorizontal = (isSwipingLeft || isSwipingRight);
+    const isSwipingTop = !isSwipingHorizontal && animatedValueY < -this.props.verticalThreshold
+    const isSwipingBottom = !isSwipingHorizontal && animatedValueY > this.props.verticalThreshold
 
     return { isSwipingLeft, isSwipingRight, isSwipingTop, isSwipingBottom }
   }
